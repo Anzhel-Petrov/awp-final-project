@@ -1,0 +1,17 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.answers {
+  border-radius: 2px;
+  border: 1px solid #6e6e6e;
+}
+
+.posts {
+  border-radius: 2px;
+  border: 1px solid #6e6e6e;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
