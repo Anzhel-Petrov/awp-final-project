@@ -13,7 +13,7 @@ import io from "socket.io-client";
 
 const API_URL = process.env.REACT_APP_API;
 const authService = new AuthService(
-  `https://awp-assignment.herokuapp.com/api/users/authenticate`
+  `https://awp-exam-final.herokuapp.com/api/users/authenticate`
 );
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const socket = io(`https://awp-assignment.herokuapp.com/api/socket`);
+    const socket = io(`https://awp-exam-final.herokuapp.com/api/socket`);
     console.log(socket);
 
     socket.on("newPost", (post) => {
@@ -35,7 +35,7 @@ function App() {
     socket.on("newAnswer", (id, answer) => {});
 
     async function getData() {
-      const url = `https://awp-assignment.herokuapp.com/api/posts`;
+      const url = `https://awp-exam-final.herokuapp.com/api/posts`;
       const response = await fetch(url);
       const data = await response.json();
       if (category === "") {
@@ -47,7 +47,7 @@ function App() {
     getData();
 
     async function getCategories() {
-      const url = `https://awp-assignment.herokuapp.com/api/categories`;
+      const url = `https://awp-exam-final.herokuapp.com/api/categories`;
       const response = await fetch(url);
       const data = await response.json();
       setCategories(data);
@@ -61,7 +61,6 @@ function App() {
       const resp = await authService.login(username, password);
       console.log("Authentication:", resp);
       console.log("Authentication:", resp.Token);
-      // authService.setToken(resp.Token);
       setCounter(counter + 1);
       setUser(username);
     } catch (e) {
@@ -79,14 +78,11 @@ function App() {
       creator: user,
     };
     const postData = async () => {
-      //const url = "http://localhost:8081/api/cooking";
-      const url = `https://awp-assignment.herokuapp.com/api/posts/addpost`;
+      const url = `https://awp-exam-final.herokuapp.com/api/posts/addpost`;
 
       const response = await authService.fetch(url, {
         method: "POST",
-        // headers: {
-        //   "Content-Type": "application/json",
-        // },
+
         body: JSON.stringify(data),
       });
       const reply = await response.json();
@@ -94,7 +90,6 @@ function App() {
       if (reply.error) {
         setError(reply.error);
         return navigate("login");
-        // throw Error(reply.error);
       }
       navigate("/");
       setCounter(counter + 1);
@@ -104,22 +99,16 @@ function App() {
   }
 
   function addAnswer(id, desc) {
-    // console.log(id, desc, creator);
-
     const data = {
       id: id,
       desc: desc,
       creator: user,
     };
     const postData = async () => {
-      //const url = "http://localhost:8081/api/cooking";
-      const url = `https://awp-assignment.herokuapp.com/api/posts/addanswer`;
+      const url = `https://awp-exam-final.herokuapp.com/api/posts/addanswer`;
 
       const response = await authService.fetch(url, {
         method: "POST",
-        // headers: {
-        //   "Content-Type": "application/json",
-        // },
         body: JSON.stringify(data),
       });
       const reply = await response.json();
@@ -127,7 +116,6 @@ function App() {
       if (reply.error) {
         setError(reply.error);
         return navigate("../login");
-        // throw Error(reply.error);
       }
       setCounter(counter + 1);
       console.log(reply.error);
@@ -143,14 +131,10 @@ function App() {
       answerID: answerID,
     };
     const postData = async () => {
-      //const url = "http://localhost:8081/api/cooking";
-      const url = `https://awp-assignment.herokuapp.com/api/posts/likeanswer`;
+      const url = `https://awp-exam-final.herokuapp.com/api/posts/likeanswer`;
 
       const response = await authService.fetch(url, {
         method: "POST",
-        // headers: {
-        //   "Content-Type": "application/json",
-        // },
         body: JSON.stringify(data),
       });
       const reply = await response.json();
@@ -158,7 +142,6 @@ function App() {
       if (reply.error) {
         setError(reply.error);
         return navigate("../login");
-        // throw Error(reply.error);
       }
       setCounter(counter + 1);
       console.log(reply.error);
@@ -174,8 +157,7 @@ function App() {
       password: password,
     };
     const postData = async () => {
-      //const url = "http://localhost:8081/api/cooking";
-      const url = `https://awp-assignment.herokuapp.com/api/users/create`;
+      const url = `https://awp-exam-final.herokuapp.com/api/users/create`;
 
       const response = await fetch(url, {
         method: "POST",
@@ -186,13 +168,11 @@ function App() {
       });
       const reply = await response.json();
       console.log(reply);
-      // setCounter(counter + 1);
     };
     postData();
   }
 
   function getPost(_id) {
-    // return data.filter(r => r._id === _id);
     return data.find((r) => r._id === _id);
   }
 
@@ -201,17 +181,6 @@ function App() {
   }
 
   function getUserComments(user) {
-    // return data.filter((i) => i.answers["answerCreator"] === user);
-    // return data.answers.filter((i) => i.userCreator === user);
-    // const comments = data.filter((character) => {
-    //   return character.answers["answerCreator"] === user;
-    // });
-    // return data.filter((i) =>
-    //   i.answers.filter((p) => p.answerCreator === user)
-    // );
-    // return data.filter(
-    //   (obj) => (obj.answers = obj.answers.filter((el) => el === user))
-    // );
     return data.filter((comments) =>
       comments.answers.some((comment) => comment.answerCreator === user)
     );
@@ -259,9 +228,6 @@ function App() {
           <Login path="/login" login={login} error={error} />
         </Router>
       </div>
-      {/* {data.map(post => {
-        return <p key={post._id}>{post.title} {post.postDescription} {post.creator}</p>;
-      })} */}
     </>
   );
 }

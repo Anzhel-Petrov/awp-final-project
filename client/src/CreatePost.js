@@ -6,7 +6,6 @@ function CreatePost(props) {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [category, setCategory] = useState("");
-  // const [creator, setCreator] = useState("");
 
   const [titleErr, setTitleErr] = useState({});
   const [descErr, setDescErr] = useState({});
@@ -39,23 +38,9 @@ function CreatePost(props) {
     return isValid;
   };
 
-  // if (!authService.loggedIn()) {
-  //   return <h3>In order to create a post you need to be logged in!</h3>;
-  // }
-
   return (
     <>
       <h3>Add Post</h3>
-      {/* <p>
-        <input
-          type="text"
-          placeholder="Write your name here"
-          size="50"
-          onChange={(event) => {
-            setCreator(event.target.value);
-          }}
-        />
-      </p> */}
       <p>
         <select
           onChange={(event) => {
@@ -105,7 +90,6 @@ function CreatePost(props) {
           const isValid = formValidation();
           if (isValid) {
             addPost(title, desc, category);
-            // navigate("/");
           }
         }}
       >

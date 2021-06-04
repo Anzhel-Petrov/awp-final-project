@@ -3,17 +3,8 @@ import { Link } from "@reach/router";
 
 function UserProfile(props) {
   const posts = props.getUserPosts(props.user);
-  //   const comments = props.data.map(function (el) {
-  //     el.answers = el.answers.filter(function (x) {
-  //       return x.answerCreator === props.user;
-  //     });
-  //     return el;
-  //   });
   const comments = props.getUserComments(props.user);
   console.log(comments);
-  //   console.log(props.user);
-  //   console.log(comments);
-
   return (
     <div>
       <h4>Posts list of user {props.user}:</h4>
