@@ -1,2 +1,2 @@
 # MERN-Assignment
-Live on [Heroku](https://awp-assignment.herokuapp.com/)
+Live on [Heroku](https://awp-exam-final.herokuapp.com/)
